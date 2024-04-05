@@ -6,6 +6,5 @@ def find_popular_words(file_path):
         text = file.read()
         words = re.findall(r'\b\w+\b', text.lower())
         word_counts = Counter(words)
-        top_words = word_counts.most_common(10)
-        return top_words
-
+        popular_words = word_counts.most_common(10)
+        return popular_words
