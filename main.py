@@ -8,16 +8,16 @@ def find_popular_words(file_path):
             words = re.findall(r'\b\w+\b', text.lower())
             word_counts = Counter(words)
             popular_words = word_counts.most_common(10)
-            return popular_words
+            popular_words_dict = dict(popular_words)
+            return popular_words_dict
     except FileNotFoundError:
         print("File not found.")
-        return []
+        return {}
 
-def write_most_common_words(file_name, popular_words):
-    try:
-        with open(file_name, 'w') as file:
-            for word, count in popular_words:
-                file.write(f"{word}-{count}\n")
-        print("Results written to", file_name)
-    except IOError:
-        print("Error writing to file.")
+def main(file_name):
+    res = find_popular_words(file_name)
+    for word, count in res.items():
+        print(f"{word}-{count}\n")
+
+if __name__ == '__main__':
+    main('input.txt')
